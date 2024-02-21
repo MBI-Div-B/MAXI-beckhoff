@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <DUT Name="BufferState" Id="{f9e34e67-7bcf-4e6d-b22e-cf8363f12bc8}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+{attribute 'strict'}
+TYPE BufferState :
+(
+	INIT, IDLE, STORING, FULL
+);
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

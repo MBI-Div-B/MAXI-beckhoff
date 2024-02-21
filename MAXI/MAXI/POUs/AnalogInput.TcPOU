@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="AnalogInput" Id="{ddb1358c-03c7-4f43-beb0-30b2435a5b4d}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK AnalogInput
+VAR
+	nRawValue AT %I*: DINT; // signed 32 bit integer representing full value range
+	fMaxVoltage: REAL := 10; // measurement range
+	valuebuffer: ValueBuffer;
+	fVoltage: REAL;
+END_VAR
+
+VAR CONSTANT
+	nMaxRawValue: REAL := 7812500;  // for 24 bit device, e.g. ELM300x - check manual
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[fVoltage := fMaxVoltage * DINT_TO_REAL(nRawValue) / nMaxRawValue;  
+
+valuebuffer(fValue:=fVoltage);  // makes sure buffer in initialized and calls StoreValueConditional
+]]></ST>
+    </Implementation>
+    <LineIds Name="AnalogInput">
+      <LineId Id="3" Count="0" />
+      <LineId Id="22" Count="0" />
+      <LineId Id="5" Count="0" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

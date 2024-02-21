@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="MAIN" Id="{eefdfd27-e1d0-4081-83be-2a23c6c22650}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM MAIN
+VAR
+	LedBlue: LED;
+	LedWhite: LED;
+	ADC1: AnalogInput;
+	ADC2: AnalogInput;
+	ADC3: AnalogInput;
+	ADC4: AnalogInput;
+	bStartBuffer: BOOL := FALSE;
+	bPrepareBuffer: BOOL := FALSE;
+	nAdcBufferSize: UDINT := 1000;
+	bStopAdcBuffer: BOOL := FALSE;
+	aTest: ARRAY [0..1000] OF REAL;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[LedBlue();
+LedWhite();
+ADC1();
+ADC2();
+ADC3();
+ADC4();
+
+IF bPrepareBuffer THEN
+	nAdcBufferSize := ADC1.valuebuffer.PrepareBuffer(nNumValues:=nAdcBufferSize);
+	nAdcBufferSize := ADC2.valuebuffer.PrepareBuffer(nNumValues:=nAdcBufferSize);
+	nAdcBufferSize := ADC3.valuebuffer.PrepareBuffer(nNumValues:=nAdcBufferSize);
+	nAdcBufferSize := ADC4.valuebuffer.PrepareBuffer(nNumValues:=nAdcBufferSize);
+	bPrepareBuffer := FALSE;
+END_IF
+
+IF bStopAdcBuffer THEN
+	ADC1.valuebuffer.StopBuffer();
+	ADC2.valuebuffer.StopBuffer();
+	ADC3.valuebuffer.StopBuffer();
+	ADC4.valuebuffer.StopBuffer();
+	bStopAdcBuffer := FALSE;
+END_IF
+
+IF bStartBuffer THEN
+	ADC1.valuebuffer.StartBuffer();
+	ADC2.valuebuffer.StartBuffer();
+	ADC3.valuebuffer.StartBuffer();
+	ADC4.valuebuffer.StartBuffer();
+	bStartBuffer := FALSE;
+END_IF
+]]></ST>
+    </Implementation>
+    <LineIds Name="MAIN">
+      <LineId Id="2" Count="0" />
+      <LineId Id="9" Count="0" />
+      <LineId Id="24" Count="0" />
+      <LineId Id="28" Count="2" />
+      <LineId Id="43" Count="0" />
+      <LineId Id="42" Count="0" />
+      <LineId Id="44" Count="0" />
+      <LineId Id="48" Count="3" />
+      <LineId Id="45" Count="0" />
+      <LineId Id="55" Count="0" />
+      <LineId Id="54" Count="0" />
+      <LineId Id="56" Count="0" />
+      <LineId Id="59" Count="3" />
+      <LineId Id="57" Count="0" />
+      <LineId Id="32" Count="0" />
+      <LineId Id="31" Count="0" />
+      <LineId Id="35" Count="0" />
+      <LineId Id="37" Count="2" />
+      <LineId Id="41" Count="0" />
+      <LineId Id="36" Count="0" />
+      <LineId Id="52" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

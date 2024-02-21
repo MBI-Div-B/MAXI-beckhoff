@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="FemtoCtrl" Id="{47c97f27-2b8d-47a2-b595-5f9aae5bbedf}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FemtoCtrl
+VAR
+	nGainBits AT %Q*: WORD; // assign multiple output bits with correct offset
+	bGainMode AT %Q*: BOOL; // TRUE: high gain, FALSE: low gain
+	bOverload AT %I*: BOOL;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="GetGain" Id="{081894b6-9955-4205-835f-df5f0efa6ce1}">
+      <Declaration><![CDATA[METHOD GetGain : WORD
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[GetGain := nGainBits;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="GetGainMode" Id="{536b6c70-298e-4105-ad43-e357434982b5}">
+      <Declaration><![CDATA[METHOD GetGainMode : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[GetGainMode := bGainMode;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="GetOverload" Id="{54060538-661f-41af-863c-eab994073f8f}">
+      <Declaration><![CDATA[METHOD GetOverload : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[GetOverload := bOverload;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="SetGain" Id="{86ce544b-1d96-4e41-bd10-3c48c4575352}">
+      <Declaration><![CDATA[METHOD SetGain
+VAR_INPUT
+	nGain: WORD;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[nGainBits := nGain;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="SetGainMode" Id="{98a5761d-a6dd-4fc6-aa41-ca05541aa048}">
+      <Declaration><![CDATA[METHOD SetGainMode
+VAR_INPUT
+	bGainHigh: BOOL;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[bGainMode := bGainHigh;]]></ST>
+      </Implementation>
+    </Method>
+    <LineIds Name="FemtoCtrl">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FemtoCtrl.GetGain">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FemtoCtrl.GetGainMode">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FemtoCtrl.GetOverload">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FemtoCtrl.SetGain">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FemtoCtrl.SetGainMode">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

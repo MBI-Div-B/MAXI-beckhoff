@@ -1,0 +1,143 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="ValueBuffer" Id="{36de9085-401e-4161-a47c-a7ed199b0f9f}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK ValueBuffer
+VAR_INPUT
+	fValue : REAL;
+END_VAR
+VAR
+	values: ARRAY[0 .. globals.MAX_BUFFER_LENGTH] OF REAL;
+	bInitialized: BOOL:=FALSE;
+	nStoreEveryNthValue : UINT:=1;
+	nCurrentIndex : UDINT:=1;
+	eBufState : BufferState:=BufferState.INIT;
+	nBufSize : UDINT:=1000;
+	nTickCount : UDINT;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[IF NOT bInitialized THEN
+	// removed: dynamic memory allocation
+	// reason: couldn't find a way to read via pyads (Error 1793 "Service is not supported by server")
+	bInitialized := TRUE;
+	eBufState := BufferState.IDLE;
+END_IF
+
+StoreValueConditional(fValue);]]></ST>
+    </Implementation>
+    <Method Name="PrepareBuffer" Id="{cfacde04-1779-43c7-b4e4-baead0d51989}">
+      <Declaration><![CDATA[METHOD PUBLIC PrepareBuffer
+VAR_INPUT
+	nNumValues: UDINT;
+END_VAR
+VAR_OUTPUT
+	nNumPrepared: UDINT;
+END_VAR
+VAR
+	n: UDINT;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF eBufState = BufferState.IDLE OR eBufState = BufferState.FULL THEN
+	// IF nNumValues <> nBufSize THEN
+		// fbMemoryBuffer.Resize(nSize:=nNumValues * SIZEOF(REAL), bPreserve:=FALSE, bReset:=TRUE);
+		// values := fbMemoryBuffer.pBuffer;
+		// nBufSize := nNumValues;
+	// ELSE
+		// fbMemoryBuffer.Clear();
+	// END_IF
+	nBufSize := MIN(nNumValues, globals.MAX_BUFFER_LENGTH);
+	nNumPrepared := nBufSize;
+	FOR n := 0 TO globals.MAX_BUFFER_LENGTH DO
+		values[n] := 0;
+	END_FOR
+eBufState := BufferState.IDLE;
+nCurrentIndex := 0;
+nTickCount := 0;
+END_IF
+
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="StartBuffer" Id="{1251b1d5-52c8-4328-8a8e-b4d9070eeefc}">
+      <Declaration><![CDATA[METHOD StartBuffer
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF eBufState = BufferState.IDLE THEN
+	eBufState := BufferState.STORING;
+END_IF
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="StopBuffer" Id="{069f8ae3-41d5-4395-b5eb-26835483a8f2}">
+      <Declaration><![CDATA[METHOD StopBuffer
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[eBufState := BufferState.FULL;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="StoreValueConditional" Id="{46265f77-403d-4aa2-9c61-79688ea47cf2}">
+      <Declaration><![CDATA[METHOD StoreValueConditional // Store value in buffer if tick count MOD buffer rate equals 0 
+VAR_INPUT
+	fValue : REAL;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF eBufState = BufferState.STORING THEN
+	IF (nTickCount MOD nStoreEveryNthValue) = 0 THEN
+		values[nCurrentIndex] := fValue;
+		nCurrentIndex := nCurrentIndex + 1;
+	END_IF
+	nTickCount := nTickCount + 1;
+END_IF
+
+IF nCurrentIndex >= nBufSize OR nCurrentIndex >= globals.MAX_BUFFER_LENGTH THEN
+	eBufState := BufferState.FULL;
+END_IF
+
+
+]]></ST>
+      </Implementation>
+    </Method>
+    <LineIds Name="ValueBuffer">
+      <LineId Id="42" Count="0" />
+      <LineId Id="51" Count="0" />
+      <LineId Id="53" Count="0" />
+      <LineId Id="44" Count="0" />
+      <LineId Id="49" Count="0" />
+      <LineId Id="45" Count="0" />
+      <LineId Id="50" Count="0" />
+      <LineId Id="23" Count="0" />
+    </LineIds>
+    <LineIds Name="ValueBuffer.PrepareBuffer">
+      <LineId Id="19" Count="0" />
+      <LineId Id="23" Count="1" />
+      <LineId Id="29" Count="1" />
+      <LineId Id="25" Count="1" />
+      <LineId Id="34" Count="0" />
+      <LineId Id="33" Count="0" />
+      <LineId Id="44" Count="0" />
+      <LineId Id="21" Count="0" />
+      <LineId Id="38" Count="1" />
+      <LineId Id="22" Count="0" />
+      <LineId Id="32" Count="0" />
+      <LineId Id="31" Count="0" />
+      <LineId Id="27" Count="0" />
+      <LineId Id="20" Count="0" />
+      <LineId Id="4" Count="0" />
+    </LineIds>
+    <LineIds Name="ValueBuffer.StartBuffer">
+      <LineId Id="8" Count="0" />
+      <LineId Id="11" Count="0" />
+      <LineId Id="10" Count="0" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="ValueBuffer.StopBuffer">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="ValueBuffer.StoreValueConditional">
+      <LineId Id="3" Count="12" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>
