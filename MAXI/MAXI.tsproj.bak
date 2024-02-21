@@ -74,11 +74,19 @@
 		</System>
 		<Plc>
 			<Project GUID="{D7858685-A17B-43B9-8C9D-389744EE726F}" Name="MAXI" PrjFilePath="MAXI\MAXI.plcproj" TmcFilePath="MAXI\MAXI.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="MAXI\MAXI.tmc" TmcHash="{09226F75-845E-3A2B-A347-95D652106917}">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="MAXI\MAXI.tmc" TmcHash="{95AA688A-65CA-A656-A261-4674476310A5}">
 					<Name>MAXI Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Vars VarGrpType="1">
 						<Name>PlcTask Inputs</Name>
+						<Var>
+							<Name>MAIN.Femto1.bOverload</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>MAIN.Femto2.bOverload</Name>
+							<Type>BOOL</Type>
+						</Var>
 						<Var>
 							<Name>MAIN.LedBlue.bOutputActive</Name>
 							<Type>BOOL</Type>
@@ -118,6 +126,26 @@
 					</Vars>
 					<Vars VarGrpType="2" AreaNo="1">
 						<Name>PlcTask Outputs</Name>
+						<Var>
+							<Name>MAIN.Femto1.nGainBits</Name>
+							<Comment><![CDATA[ assign multiple output bits with correct offset]]></Comment>
+							<Type>WORD</Type>
+						</Var>
+						<Var>
+							<Name>MAIN.Femto1.bGainMode</Name>
+							<Comment><![CDATA[ TRUE: high gain, FALSE: low gain]]></Comment>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>MAIN.Femto2.nGainBits</Name>
+							<Comment><![CDATA[ assign multiple output bits with correct offset]]></Comment>
+							<Type>WORD</Type>
+						</Var>
+						<Var>
+							<Name>MAIN.Femto2.bGainMode</Name>
+							<Comment><![CDATA[ TRUE: high gain, FALSE: low gain]]></Comment>
+							<Type>BOOL</Type>
+						</Var>
 						<Var>
 							<Name>MAIN.LedBlue.bOutputSetpoint</Name>
 							<Type>BOOL</Type>
@@ -15676,6 +15704,22 @@ Bit1: Value smaller than Limit1]]></Comment>
 				<Link VarA="PlcTask Inputs^MAIN.ADC2.nRawValue" VarB="PAI Samples 1 Channel 2^Samples[0]"/>
 				<Link VarA="PlcTask Inputs^MAIN.ADC3.nRawValue" VarB="PAI Samples 1 Channel 3^Samples[0]"/>
 				<Link VarA="PlcTask Inputs^MAIN.ADC4.nRawValue" VarB="PAI Samples 1 Channel 4^Samples[0]"/>
+			</OwnerB>
+			<OwnerB Name="TIID^Device 1 (EtherCAT)^Term 1 (EK1200)^Term 7 (EL1124)">
+				<Link VarA="PlcTask Inputs^MAIN.Femto1.bOverload" VarB="Channel 1^Input"/>
+				<Link VarA="PlcTask Inputs^MAIN.Femto2.bOverload" VarB="Channel 2^Input"/>
+			</OwnerB>
+			<OwnerB Name="TIID^Device 1 (EtherCAT)^Term 1 (EK1200)^Term 8 (EL2124)">
+				<Link VarA="PlcTask Outputs^MAIN.Femto1.bGainMode" VarB="Channel 4^Output"/>
+				<Link VarA="PlcTask Outputs^MAIN.Femto1.nGainBits" VarB="Channel 1^Output"/>
+				<Link VarA="PlcTask Outputs^MAIN.Femto1.nGainBits" VarB="Channel 2^Output" Size="1" OffsA="1"/>
+				<Link VarA="PlcTask Outputs^MAIN.Femto1.nGainBits" VarB="Channel 3^Output" Size="1" OffsA="2"/>
+			</OwnerB>
+			<OwnerB Name="TIID^Device 1 (EtherCAT)^Term 1 (EK1200)^Term 9 (EL2124)">
+				<Link VarA="PlcTask Outputs^MAIN.Femto2.bGainMode" VarB="Channel 4^Output"/>
+				<Link VarA="PlcTask Outputs^MAIN.Femto2.nGainBits" VarB="Channel 1^Output"/>
+				<Link VarA="PlcTask Outputs^MAIN.Femto2.nGainBits" VarB="Channel 2^Output" Size="1" OffsA="1"/>
+				<Link VarA="PlcTask Outputs^MAIN.Femto2.nGainBits" VarB="Channel 3^Output" Size="1" OffsA="2"/>
 			</OwnerB>
 		</OwnerA>
 	</Mappings>

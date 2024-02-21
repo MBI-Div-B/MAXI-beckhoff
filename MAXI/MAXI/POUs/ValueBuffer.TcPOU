@@ -47,7 +47,7 @@ END_VAR]]></Declaration>
 	// END_IF
 	nBufSize := MIN(nNumValues, globals.MAX_BUFFER_LENGTH);
 	nNumPrepared := nBufSize;
-	FOR n := 0 TO globals.MAX_BUFFER_LENGTH DO
+	FOR n := 0 TO nBufSize DO
 		values[n] := 0;
 	END_FOR
 eBufState := BufferState.IDLE;
