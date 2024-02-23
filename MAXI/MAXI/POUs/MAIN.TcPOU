@@ -13,7 +13,7 @@ VAR
 	ADC4: AnalogInput;
 	bStartBuffer: BOOL := TRUE;
 	bPrepareBuffer: BOOL := FALSE;
-	nAdcBufferSize: UDINT := 1000;
+	nAdcBufferSize: UDINT := 1000; // size of array for dedicated acquisitions 
 	bStopAdcBuffer: BOOL := FALSE;
 END_VAR
 ]]></Declaration>
@@ -55,7 +55,7 @@ END_IF
       <LineId Id="9" Count="0" />
       <LineId Id="24" Count="0" />
       <LineId Id="28" Count="2" />
-      <LineId Id="43" Count="0" />
+      <LineId Id="74" Count="0" />
       <LineId Id="42" Count="0" />
       <LineId Id="44" Count="0" />
       <LineId Id="48" Count="3" />
