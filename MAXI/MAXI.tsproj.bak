@@ -74,7 +74,7 @@
 		</System>
 		<Plc>
 			<Project GUID="{D7858685-A17B-43B9-8C9D-389744EE726F}" Name="MAXI" PrjFilePath="MAXI\MAXI.plcproj" TmcFilePath="MAXI\MAXI.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="MAXI\MAXI.tmc" TmcHash="{95AA688A-65CA-A656-A261-4674476310A5}">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="MAXI\MAXI.tmc" TmcHash="{B541C2C2-EDCD-66AC-A771-202C95FC989F}">
 					<Name>MAXI Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Vars VarGrpType="1">
@@ -350,10 +350,10 @@
 								<Entry Name="Status__Switching operation counter" Index="#x6000" Sub="#x04">
 									<Type>BIT3</Type>
 								</Entry>
-								<Entry Name="Status__Warning" Index="#x6000" Sub="#x07">
+								<Entry Name="Status__Warning" Index="#x6000" Sub="#x07" Flags="#x00008020">
 									<Type>BIT</Type>
 								</Entry>
-								<Entry Name="Status__Error" Index="#x6000" Sub="#x08">
+								<Entry Name="Status__Error" Index="#x6000" Sub="#x08" Flags="#x00008020">
 									<Type>BIT</Type>
 								</Entry>
 								<Entry Name="Status__">
@@ -401,7 +401,7 @@
 								<Entry Name="Control__">
 									<Type GUID="{18071995-0000-0000-0000-002000000003}">ARRAY [0..2] OF BIT</Type>
 								</Entry>
-								<Entry Name="Control__Reset" Index="#x7000" Sub="#x08">
+								<Entry Name="Control__Reset" Index="#x7000" Sub="#x08" Flags="#x00008020">
 									<Type>BIT</Type>
 								</Entry>
 								<Entry Name="Control__">
@@ -701,7 +701,7 @@ Bit1: Value smaller than Limit1]]></Comment>
 								<ExcludePdo>#x1a1d</ExcludePdo>
 								<ExcludePdo>#x1a1e</ExcludePdo>
 								<ExcludePdo>#x1a1f</ExcludePdo>
-								<Entry Name="Samples__ARRAY [0]" Index="#x6001" Sub="#x01">
+								<Entry Name="Samples__ARRAY [0]" Index="#x6001" Sub="#x01" Flags="#x00018020">
 									<Type>DINT</Type>
 								</Entry>
 							</Pdo>
@@ -2508,10 +2508,10 @@ Bit1: Value smaller than Limit1]]></Comment>
 								</Entry>
 							</Pdo>
 							<Pdo Name="PAI Timestamp Channel 1" Index="#x1a10" Flags="#x0010" SyncMan="3">
-								<Entry Name="StartTimeNextLatch__Low" Index="#x6005" Sub="#x01">
+								<Entry Name="StartTimeNextLatch__Low" Index="#x6005" Sub="#x01" Flags="#x00008020">
 									<Type>UDINT</Type>
 								</Entry>
-								<Entry Name="StartTimeNextLatch__Hi" Index="#x6005" Sub="#x02">
+								<Entry Name="StartTimeNextLatch__Hi" Index="#x6005" Sub="#x02" Flags="#x00008020">
 									<Type>UDINT</Type>
 								</Entry>
 							</Pdo>
