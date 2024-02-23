@@ -74,7 +74,7 @@
 		</System>
 		<Plc>
 			<Project GUID="{D7858685-A17B-43B9-8C9D-389744EE726F}" Name="MAXI" PrjFilePath="MAXI\MAXI.plcproj" TmcFilePath="MAXI\MAXI.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="MAXI\MAXI.tmc" TmcHash="{362B9435-C6EF-8939-38AA-C3F2E9236D64}">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="MAXI\MAXI.tmc" TmcHash="{ED1843A7-7053-1E3A-0808-1C84133CDE2A}">
 					<Name>MAXI Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Vars VarGrpType="1">

@@ -15,6 +15,10 @@ VAR
 	bPrepareBuffer: BOOL := FALSE;
 	nAdcBufferSize: UDINT := 1000; // size of array for dedicated acquisitions 
 	bStopAdcBuffer: BOOL := FALSE;
+	sCommand: STRING := '';
+	bExecuteCommand: BOOL := FALSE;
+	sCommandResult: STRING := '';
+	fb_Shutdown: NT_Shutdown;
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -48,7 +52,15 @@ IF bStartBuffer THEN
 	ADC4.valuebuffer.StartBuffer();
 	bStartBuffer := FALSE;
 END_IF
-]]></ST>
+
+IF bExecuteCommand THEN
+	IF sCommand = 'SHUTDOWN' THEN
+		fb_Shutdown(NETID:='', DELAY:=0, START:=bExecuteCommand);
+		sCommandResult := 'shutting down';
+	ELSE
+		sCommandResult := 'unknown command';
+	END_IF
+END_IF]]></ST>
     </Implementation>
     <LineIds Name="MAIN">
       <LineId Id="2" Count="0" />
@@ -71,7 +83,12 @@ END_IF
       <LineId Id="37" Count="2" />
       <LineId Id="41" Count="0" />
       <LineId Id="36" Count="0" />
+      <LineId Id="78" Count="0" />
       <LineId Id="52" Count="0" />
+      <LineId Id="79" Count="0" />
+      <LineId Id="83" Count="3" />
+      <LineId Id="88" Count="0" />
+      <LineId Id="80" Count="0" />
     </LineIds>
   </POU>
 </TcPlcObject>
