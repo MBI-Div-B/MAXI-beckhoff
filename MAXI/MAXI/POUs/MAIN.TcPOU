@@ -16,7 +16,7 @@ VAR
 	nAdcBufferSize: UDINT := 1000; // size of array for dedicated acquisitions 
 	bStopAdcBuffer: BOOL := FALSE;
 	sCommand: STRING := '';
-	bExecuteCommand: BOOL := FALSE;
+	bCommandExecute: BOOL := FALSE;
 	sCommandResult: STRING := '';
 	fb_Shutdown: NT_Shutdown;
 END_VAR
@@ -53,41 +53,18 @@ IF bStartBuffer THEN
 	bStartBuffer := FALSE;
 END_IF
 
-IF bExecuteCommand THEN
+IF bCommandExecute THEN
 	IF sCommand = 'SHUTDOWN' THEN
-		fb_Shutdown(NETID:='', DELAY:=0, START:=bExecuteCommand);
+		fb_Shutdown(NETID:='', DELAY:=0, START:=bCommandExecute);
 		sCommandResult := 'shutting down';
 	ELSE
 		sCommandResult := 'unknown command';
 	END_IF
+	bCommandExecute := FALSE;
 END_IF]]></ST>
     </Implementation>
     <LineIds Name="MAIN">
-      <LineId Id="2" Count="0" />
-      <LineId Id="9" Count="0" />
-      <LineId Id="24" Count="0" />
-      <LineId Id="28" Count="2" />
-      <LineId Id="74" Count="0" />
-      <LineId Id="42" Count="0" />
-      <LineId Id="44" Count="0" />
-      <LineId Id="48" Count="3" />
-      <LineId Id="45" Count="0" />
-      <LineId Id="55" Count="0" />
-      <LineId Id="54" Count="0" />
-      <LineId Id="56" Count="0" />
-      <LineId Id="59" Count="3" />
-      <LineId Id="57" Count="0" />
-      <LineId Id="32" Count="0" />
-      <LineId Id="31" Count="0" />
-      <LineId Id="35" Count="0" />
-      <LineId Id="37" Count="2" />
-      <LineId Id="41" Count="0" />
-      <LineId Id="36" Count="0" />
-      <LineId Id="78" Count="0" />
-      <LineId Id="52" Count="0" />
-      <LineId Id="79" Count="0" />
-      <LineId Id="83" Count="3" />
-      <LineId Id="88" Count="0" />
+      <LineId Id="109" Count="38" />
       <LineId Id="80" Count="0" />
     </LineIds>
   </POU>
