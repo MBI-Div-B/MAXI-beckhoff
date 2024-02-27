@@ -74,7 +74,7 @@
 		</System>
 		<Plc>
 			<Project GUID="{D7858685-A17B-43B9-8C9D-389744EE726F}" Name="MAXI" PrjFilePath="MAXI\MAXI.plcproj" TmcFilePath="MAXI\MAXI.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="MAXI\MAXI.tmc" TmcHash="{D060C9C0-4387-2F0A-AA63-2584D523CFB3}">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="MAXI\MAXI.tmc" TmcHash="{BD368899-3294-2EAD-0735-239775DF828F}">
 					<Name>MAXI Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Vars VarGrpType="1">
@@ -151,11 +151,11 @@
 							<Type>BOOL</Type>
 						</Var>
 						<Var>
-							<Name>MAIN.LedBlue.bOutputSetpoint</Name>
+							<Name>MAIN.LedWhite.bOutputSetpoint</Name>
 							<Type>BOOL</Type>
 						</Var>
 						<Var>
-							<Name>MAIN.LedWhite.bOutputSetpoint</Name>
+							<Name>MAIN.LedBlue.bOutputSetpoint</Name>
 							<Type>BOOL</Type>
 						</Var>
 					</Vars>

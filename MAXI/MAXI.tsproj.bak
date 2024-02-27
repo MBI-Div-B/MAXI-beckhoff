@@ -74,7 +74,7 @@
 		</System>
 		<Plc>
 			<Project GUID="{D7858685-A17B-43B9-8C9D-389744EE726F}" Name="MAXI" PrjFilePath="MAXI\MAXI.plcproj" TmcFilePath="MAXI\MAXI.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="MAXI\MAXI.tmc" TmcHash="{ED1843A7-7053-1E3A-0808-1C84133CDE2A}">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="MAXI\MAXI.tmc" TmcHash="{D060C9C0-4387-2F0A-AA63-2584D523CFB3}">
 					<Name>MAXI Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Vars VarGrpType="1">
@@ -102,6 +102,10 @@
 						<Var>
 							<Name>MAIN.LedWhite.nCurrent</Name>
 							<Type>UINT</Type>
+						</Var>
+						<Var>
+							<Name>MAIN.flowmeter.bReedSwitch</Name>
+							<Type>BOOL</Type>
 						</Var>
 						<Var>
 							<Name>MAIN.ADC1.nRawValue</Name>
@@ -133,7 +137,7 @@
 						</Var>
 						<Var>
 							<Name>MAIN.Femto1.bGainMode</Name>
-							<Comment><![CDATA[ TRUE: high gain, FALSE: low gain]]></Comment>
+							<Comment><![CDATA[ TRUE: low noise, FALSE: high speed]]></Comment>
 							<Type>BOOL</Type>
 						</Var>
 						<Var>
@@ -143,7 +147,7 @@
 						</Var>
 						<Var>
 							<Name>MAIN.Femto2.bGainMode</Name>
-							<Comment><![CDATA[ TRUE: high gain, FALSE: low gain]]></Comment>
+							<Comment><![CDATA[ TRUE: low noise, FALSE: high speed]]></Comment>
 							<Type>BOOL</Type>
 						</Var>
 						<Var>
@@ -338,10 +342,10 @@
 							<DcMode>444300000000000000000000000000004443206163746976652028436f6e74726f6c6c65722068616e646c6564290000000000000000000000000000000001030000000000000000000000000000000000000000000000000000000000000000</DcMode>
 							<MBoxUserCmdData>004003000c0000000000000003000000000000000000000000000000000000002081f001040000000000130000</MBoxUserCmdData>
 							<Pdo Name="DOX Status" Index="#x1a00" Flags="#x0010" SyncMan="3">
-								<Entry Name="Status__Ready to activate" Index="#x6000" Sub="#x01">
+								<Entry Name="Status__Ready to activate" Index="#x6000" Sub="#x01" Flags="#x00008020">
 									<Type>BIT</Type>
 								</Entry>
-								<Entry Name="Status__Output active" Index="#x6000" Sub="#x02">
+								<Entry Name="Status__Output active" Index="#x6000" Sub="#x02" Flags="#x00008020">
 									<Type>BIT</Type>
 								</Entry>
 								<Entry Name="Status__">
@@ -365,7 +369,7 @@
 								<Entry Name="Status__">
 									<Type GUID="{18071995-0000-0000-0000-002000000003}">ARRAY [0..2] OF BIT</Type>
 								</Entry>
-								<Entry Name="Status__TxPDO Toggle" Index="#x6000" Sub="#x10">
+								<Entry Name="Status__TxPDO Toggle" Index="#x6000" Sub="#x10" Flags="#x00008020">
 									<Type>BIT</Type>
 								</Entry>
 							</Pdo>
@@ -389,7 +393,7 @@
 								<Entry Name="Control__">
 									<Type GUID="{18071995-0000-0000-0000-002000000001}">ARRAY [0..0] OF BIT</Type>
 								</Entry>
-								<Entry Name="Control__Output" Index="#x7000" Sub="#x02">
+								<Entry Name="Control__Output" Index="#x7000" Sub="#x02" Flags="#x00008020">
 									<Type>BIT</Type>
 								</Entry>
 								<Entry Name="Control__">
@@ -15707,7 +15711,8 @@ Bit1: Value smaller than Limit1]]></Comment>
 			</OwnerB>
 			<OwnerB Name="TIID^Device 1 (EtherCAT)^Term 1 (EK1200)^Term 7 (EL1124)">
 				<Link VarA="PlcTask Inputs^MAIN.Femto1.bOverload" VarB="Channel 1^Input"/>
-				<Link VarA="PlcTask Inputs^MAIN.Femto2.bOverload" VarB="Channel 2^Input"/>
+				<Link VarA="PlcTask Inputs^MAIN.Femto2.bOverload" VarB="Channel 3^Input"/>
+				<Link VarA="PlcTask Inputs^MAIN.flowmeter.bReedSwitch" VarB="Channel 2^Input"/>
 			</OwnerB>
 			<OwnerB Name="TIID^Device 1 (EtherCAT)^Term 1 (EK1200)^Term 8 (EL2124)">
 				<Link VarA="PlcTask Outputs^MAIN.Femto1.bGainMode" VarB="Channel 4^Output"/>
