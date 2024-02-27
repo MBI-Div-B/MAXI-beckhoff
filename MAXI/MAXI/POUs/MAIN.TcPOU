@@ -15,6 +15,7 @@ VAR
 	bPrepareBuffer: BOOL := FALSE;
 	nAdcBufferSize: UDINT := 1000; // size of array for dedicated acquisitions 
 	bStopAdcBuffer: BOOL := FALSE;
+	flowmeter: FlowMeter;
 	sCommand: STRING := '';
 	bCommandExecute: BOOL := FALSE;
 	sCommandResult: STRING := '';
@@ -28,6 +29,8 @@ ADC1();
 ADC2();
 ADC3();
 ADC4();
+
+flowmeter();
 
 IF bPrepareBuffer THEN
 	nAdcBufferSize := ADC1.valuebuffer.PrepareBuffer(nNumValues:=nAdcBufferSize);
@@ -64,7 +67,10 @@ IF bCommandExecute THEN
 END_IF]]></ST>
     </Implementation>
     <LineIds Name="MAIN">
-      <LineId Id="109" Count="38" />
+      <LineId Id="109" Count="5" />
+      <LineId Id="150" Count="0" />
+      <LineId Id="149" Count="0" />
+      <LineId Id="115" Count="32" />
       <LineId Id="80" Count="0" />
     </LineIds>
   </POU>

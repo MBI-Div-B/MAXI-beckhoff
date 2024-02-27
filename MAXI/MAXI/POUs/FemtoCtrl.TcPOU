@@ -4,7 +4,7 @@
     <Declaration><![CDATA[FUNCTION_BLOCK FemtoCtrl
 VAR
 	nGainBits AT %Q*: WORD; // assign multiple output bits with correct offset
-	bGainMode AT %Q*: BOOL; // TRUE: high gain, FALSE: low gain
+	bGainMode AT %Q*: BOOL := TRUE; // TRUE: low noise, FALSE: high speed
 	bOverload AT %I*: BOOL;
 END_VAR
 ]]></Declaration>

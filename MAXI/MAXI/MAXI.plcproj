@@ -37,6 +37,9 @@
     <Compile Include="POUs\FilterRingBuffer.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\FlowMeter.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="POUs\LED.TcPOU">
       <SubType>Code</SubType>
     </Compile>
